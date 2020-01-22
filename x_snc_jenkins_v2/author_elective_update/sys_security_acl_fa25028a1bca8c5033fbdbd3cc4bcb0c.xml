@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description>Default access control on x_snc_jenkins_v2_jenkins_webhook_client_details</description>
+        <name>x_snc_jenkins_v2_jenkins_webhook_client_details</name>
+        <operation display_value="read">read</operation>
+        <script/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:53:42</sys_created_on>
+        <sys_id>fa25028a1bca8c5033fbdbd3cc4bcb0c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_jenkins_v2_jenkins_webhook_client_details</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_security_acl_fa25028a1bca8c5033fbdbd3cc4bcb0c</sys_update_name>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:53:42</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</application>
+        <file_path/>
+        <instance_id>10750c93db688014387021c405961985</instance_id>
+        <instance_name>ecsdev1</instance_name>
+        <name>sys_security_acl_fa25028a1bca8c5033fbdbd3cc4bcb0c</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>true</admin_overrides><advanced>false</advanced><condition/><description>Default access control on x_snc_jenkins_v2_jenkins_webhook_client_details</description><name>x_snc_jenkins_v2_jenkins_webhook_client_details</name><operation display_value="read">read</operation><script/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>priytams</sys_created_by><sys_created_on>2020-01-01 11:53:42</sys_created_on><sys_id>fa25028a1bca8c5033fbdbd3cc4bcb0c</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_snc_jenkins_v2_jenkins_webhook_client_details</sys_name><sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package><sys_policy/><sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope><sys_update_name>sys_security_acl_fa25028a1bca8c5033fbdbd3cc4bcb0c</sys_update_name><sys_updated_by>priytams</sys_updated_by><sys_updated_on>2020-01-01 11:53:42</sys_updated_on><type display_value="record">record</type></sys_security_acl></record_update>]]></payload>
+        <payload_hash>-1039821142</payload_hash>
+        <record_name>x_snc_jenkins_v2_jenkins_webhook_client_details</record_name>
+        <reverted_from/>
+        <source>466af1ca1b8a8c5033fbdbd3cc4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:53:42</sys_created_on>
+        <sys_id>b625028a1bca8c5033fbdbd3cc4bcb0f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16f60f455030000001</sys_recorded_at>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:53:42</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>fe25028a84ca8c50c7a2ed67cb2da50e</update_guid>
+        <update_guid_history>fe25028a84ca8c50c7a2ed67cb2da50e:-1039821142</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 12:07:40</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>15aa447142fb4acea8ce53b4733240c4</sys_id>
+        <sys_metadata>fa25028a1bca8c5033fbdbd3cc4bcb0c</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_jenkins_v2_jenkins_webhook_client_details</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_parent display_value="">7225028a1bca8c5033fbdbd3cc4bcb2b</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_scope_delete display_value="">0ad188ab51f44da390b97cda915fb7f1</sys_scope_delete>
+        <sys_update_name>sys_security_acl_fa25028a1bca8c5033fbdbd3cc4bcb0c</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_fa25028a1bca8c5033fbdbd3cc4bcb0c">b625028a1bca8c5033fbdbd3cc4bcb0f</sys_update_version>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:07:40</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

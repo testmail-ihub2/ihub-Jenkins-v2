@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module">
+    <sys_ui_module action="DELETE">
+        <active>true</active>
+        <application display_value="Jenkins Webhook Client Details">bff04f7d1bf98cd0e2e2fdd2cd4bcbb7</application>
+        <filter/>
+        <name>Jenkins Webhook Client Details</name>
+        <order/>
+        <path/>
+        <path_relative_to_root>false</path_relative_to_root>
+        <roles>x_snc_jenkins_v2.jenkins_webhook_client_details_user</roles>
+        <sys_class_name>sys_ui_module</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:53:42</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7625ce4a1bca8c5033fbdbd3cc4bcbf5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Jenkins Webhook Client Details</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_ui_module_7625ce4a1bca8c5033fbdbd3cc4bcbf5</sys_update_name>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:53:42</sys_updated_on>
+        <table>x_snc_jenkins_v2_jenkins_webhook_client_details</table>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+    </sys_ui_module>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</application>
+        <file_path/>
+        <instance_id>10750c93db688014387021c405961985</instance_id>
+        <instance_name>ecsdev1</instance_name>
+        <name>sys_ui_module_7625ce4a1bca8c5033fbdbd3cc4bcbf5</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module"><sys_ui_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Jenkins Webhook Client Details">bff04f7d1bf98cd0e2e2fdd2cd4bcbb7</application><filter/><name>Jenkins Webhook Client Details</name><order/><path/><path_relative_to_root>false</path_relative_to_root><roles>x_snc_jenkins_v2.jenkins_webhook_client_details_user</roles><sys_class_name>sys_ui_module</sys_class_name><sys_created_by>priytams</sys_created_by><sys_created_on>2020-01-01 11:53:42</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>7625ce4a1bca8c5033fbdbd3cc4bcbf5</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Jenkins Webhook Client Details</sys_name><sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package><sys_policy/><sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope><sys_update_name>sys_ui_module_7625ce4a1bca8c5033fbdbd3cc4bcbf5</sys_update_name><sys_updated_by>priytams</sys_updated_by><sys_updated_on>2020-01-01 11:53:42</sys_updated_on><table>x_snc_jenkins_v2_jenkins_webhook_client_details</table><uncancelable>false</uncancelable><view_name/></sys_ui_module></record_update>]]></payload>
+        <payload_hash>-934173346</payload_hash>
+        <record_name>Jenkins Webhook Client Details</record_name>
+        <reverted_from/>
+        <source>466af1ca1b8a8c5033fbdbd3cc4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:53:42</sys_created_on>
+        <sys_id>be25ce4a1bca8c5033fbdbd3cc4bcbf7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16f60f453b70000001</sys_recorded_at>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:53:42</sys_updated_on>
+        <type>Module</type>
+        <update_guid>f625ce4ac1ca8c50a2f54aa6094546f7</update_guid>
+        <update_guid_history>f625ce4ac1ca8c50a2f54aa6094546f7:-934173346</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 12:07:42</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_module">sys_ui_module</sys_db_object>
+        <sys_id>1f25c61d91474b5cb616c52833b22890</sys_id>
+        <sys_metadata>7625ce4a1bca8c5033fbdbd3cc4bcbf5</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Jenkins Webhook Client Details</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_scope_delete display_value="">0ad188ab51f44da390b97cda915fb7f1</sys_scope_delete>
+        <sys_update_name>sys_ui_module_7625ce4a1bca8c5033fbdbd3cc4bcbf5</sys_update_name>
+        <sys_update_version display_value="sys_ui_module_7625ce4a1bca8c5033fbdbd3cc4bcbf5">be25ce4a1bca8c5033fbdbd3cc4bcbf7</sys_update_version>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:07:42</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

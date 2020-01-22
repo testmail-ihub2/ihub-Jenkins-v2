@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="DELETE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 12:08:07</sys_created_on>
+        <sys_id>b578428e1bca8c5033fbdbd3cc4bcb87</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_snc_jenkins_v2_jenkins_webhook_client_details.x_snc_jenkins_v2.jenkins_admin</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_security_acl display_value="x_snc_jenkins_v2_jenkins_webhook_client_details">b578428e1bca8c5033fbdbd3cc4bcb6b</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_b578428e1bca8c5033fbdbd3cc4bcb87</sys_update_name>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:08:26</sys_updated_on>
+        <sys_user_role display_value="x_snc_jenkins_v2.jenkins_admin" name="x_snc_jenkins_v2.jenkins_admin">9ee6420e1bca8c5033fbdbd3cc4bcbf1</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</application>
+        <file_path/>
+        <instance_id>10750c93db688014387021c405961985</instance_id>
+        <instance_name>ecsdev1</instance_name>
+        <name>sys_security_acl_role_b578428e1bca8c5033fbdbd3cc4bcb87</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>priytams</sys_created_by><sys_created_on>2020-01-01 12:08:07</sys_created_on><sys_id>b578428e1bca8c5033fbdbd3cc4bcb87</sys_id><sys_mod_count>1</sys_mod_count><sys_name>x_snc_jenkins_v2_jenkins_webhook_client_details.x_snc_jenkins_v2.jenkins_admin</sys_name><sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package><sys_policy/><sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope><sys_security_acl display_value="x_snc_jenkins_v2_jenkins_webhook_client_details">b578428e1bca8c5033fbdbd3cc4bcb6b</sys_security_acl><sys_update_name>sys_security_acl_role_b578428e1bca8c5033fbdbd3cc4bcb87</sys_update_name><sys_updated_by>priytams</sys_updated_by><sys_updated_on>2020-01-01 12:08:26</sys_updated_on><sys_user_role display_value="x_snc_jenkins_v2.jenkins_admin" name="x_snc_jenkins_v2.jenkins_admin">9ee6420e1bca8c5033fbdbd3cc4bcbf1</sys_user_role><transaction_id/></sys_security_acl_role></record_update>]]></payload>
+        <payload_hash>632838106</payload_hash>
+        <record_name>x_snc_jenkins_v2_jenkins_webhook_client_details.x_snc_jenkins_v2.jenkins_admin</record_name>
+        <reverted_from/>
+        <source>466af1ca1b8a8c5033fbdbd3cc4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 12:08:26</sys_created_on>
+        <sys_id>6e88068e1bca8c5033fbdbd3cc4bcb45</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16f6101d04c0000001</sys_recorded_at>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:08:26</sys_updated_on>
+        <type>Access Roles</type>
+        <update_guid>a688068e1fca8c50bbb7658bc1e32245</update_guid>
+        <update_guid_history>a688068e1fca8c50bbb7658bc1e32245:632838106,b578428e99ca8c50d0d605c084a66f89:975227608</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="x_snc_jenkins_v2_jenkins_webhook_client_details.x_snc_jenkins_v2.jenkins_admin">316d069a1b8acc5033fbdbd3cc4bcb0a</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 07:08:09</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl_role">sys_security_acl_role</sys_db_object>
+        <sys_id>2efffdac8ce1432a99e0d1bd58c9f2a1</sys_id>
+        <sys_metadata>b578428e1bca8c5033fbdbd3cc4bcb87</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_jenkins_v2_jenkins_webhook_client_details.x_snc_jenkins_v2.jenkins_admin</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_scope_delete display_value="">0ad188ab51f44da390b97cda915fb7f1</sys_scope_delete>
+        <sys_update_name>sys_security_acl_role_b578428e1bca8c5033fbdbd3cc4bcb87</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_role_b578428e1bca8c5033fbdbd3cc4bcb87">6e88068e1bca8c5033fbdbd3cc4bcb45</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 07:08:09</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
