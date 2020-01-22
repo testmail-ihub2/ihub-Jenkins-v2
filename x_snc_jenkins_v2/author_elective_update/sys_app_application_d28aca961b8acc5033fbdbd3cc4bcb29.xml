@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_application">
+    <sys_app_application action="DELETE">
+        <active>true</active>
+        <category display_value="Custom Applications">e0355b31ef303000a61d5a3615c0fb78</category>
+        <description/>
+        <device_type>browser</device_type>
+        <hint/>
+        <name>Job Build Information</name>
+        <order>100</order>
+        <roles>x_snc_jenkins_v2.jenkins_admin</roles>
+        <sys_class_name>sys_app_application</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 06:55:38</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d28aca961b8acc5033fbdbd3cc4bcb29</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>jen</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_app_application_d28aca961b8acc5033fbdbd3cc4bcb29</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 07:03:11</sys_updated_on>
+        <title>jen</title>
+        <view_name/>
+    </sys_app_application>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</application>
+        <file_path/>
+        <instance_id>10750c93db688014387021c405961985</instance_id>
+        <instance_name>ecsdev1</instance_name>
+        <name>sys_app_application_d28aca961b8acc5033fbdbd3cc4bcb29</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_application"><sys_app_application action="INSERT_OR_UPDATE"><active>true</active><category display_value="Custom Applications">e0355b31ef303000a61d5a3615c0fb78</category><description/><device_type>browser</device_type><hint/><name>Job Build Information</name><order>100</order><roles>x_snc_jenkins_v2.jenkins_admin</roles><sys_class_name>sys_app_application</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-01-02 06:55:38</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>d28aca961b8acc5033fbdbd3cc4bcb29</sys_id><sys_mod_count>3</sys_mod_count><sys_name>jen</sys_name><sys_overrides/><sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package><sys_policy/><sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope><sys_update_name>sys_app_application_d28aca961b8acc5033fbdbd3cc4bcb29</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-01-02 07:03:11</sys_updated_on><title>jen</title><view_name/></sys_app_application></record_update>]]></payload>
+        <payload_hash>1314475590</payload_hash>
+        <record_name>jen</record_name>
+        <reverted_from/>
+        <source>466af1ca1b8a8c5033fbdbd3cc4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 07:03:11</sys_created_on>
+        <sys_id>014c0e1a1b8acc5033fbdbd3cc4bcbb2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16f6510b7210000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 07:03:11</sys_updated_on>
+        <type>Application Menu</type>
+        <update_guid>494c0e1ad48acc504e16dc8cd2d639b1</update_guid>
+        <update_guid_history>494c0e1ad48acc504e16dc8cd2d639b1:1314475590,b81c8a1af88acc508fb0cd2a9a5b3804:500707292,2dfb861a968acc50877256eb305307ac:1317690332,9a8aca963b8acc50fe358b329e31332b:1027053774</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="jen">916e0ada1b8acc5033fbdbd3cc4bcb57</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 07:12:30</sys_created_on>
+        <sys_db_object display_value="" name="sys_app_application">sys_app_application</sys_db_object>
+        <sys_id>3350c25e53d64680974319843cdbbbb1</sys_id>
+        <sys_metadata>d28aca961b8acc5033fbdbd3cc4bcb29</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>jen</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_scope_delete display_value="">0ad188ab51f44da390b97cda915fb7f1</sys_scope_delete>
+        <sys_update_name>sys_app_application_d28aca961b8acc5033fbdbd3cc4bcb29</sys_update_name>
+        <sys_update_version display_value="sys_app_application_d28aca961b8acc5033fbdbd3cc4bcb29">014c0e1a1b8acc5033fbdbd3cc4bcbb2</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 07:12:30</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

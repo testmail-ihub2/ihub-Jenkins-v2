@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="status" table="var__m_sys_hub_action_output_8fb5b3bb1bce8054e2e2fdd2cd4bcb55" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Success</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_output_8fb5b3bb1bce8054e2e2fdd2cd4bcb55</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-01-07 06:34:55</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>efb5b3bb1bce8054e2e2fdd2cd4bcbfb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-01-07 06:34:55</sys_updated_on>
+            <value>Success</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Error</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_output_8fb5b3bb1bce8054e2e2fdd2cd4bcb55</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-01-07 06:34:55</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6fb5b3bb1bce8054e2e2fdd2cd4bcbfc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-01-07 06:34:55</sys_updated_on>
+            <value>Error</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>status</element>
+            <name>var__m_sys_hub_action_output_8fb5b3bb1bce8054e2e2fdd2cd4bcb55</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-01-07 06:34:55</sys_created_on>
+            <sys_id>2bb5b3bb1bce8054e2e2fdd2cd4bcbfc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name/>
+            <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+            <sys_update_name/>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-01-07 06:34:55</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

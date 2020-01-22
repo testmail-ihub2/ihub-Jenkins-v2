@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="DELETE">
+        <active>true</active>
+        <application display_value="Jenkins v2">b578028e1bca8c5033fbdbd3cc4bcbc7</application>
+        <assessment/>
+        <device_type/>
+        <filter/>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>LIST</link_type>
+        <map_page/>
+        <mobile_title>Job Build Informations</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name>x_snc_jenkins_v2_job_build_information</name>
+        <order/>
+        <override_menu_roles>false</override_menu_roles>
+        <query/>
+        <report/>
+        <roles>x_snc_jenkins_v2.jenkins_admin,x_snc_jenkins_v2.jenkins_user</roles>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 06:55:38</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>1a8aca961b8acc5033fbdbd3cc4bcb2c</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Job Build Information</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_app_module_1a8aca961b8acc5033fbdbd3cc4bcb2c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 07:13:12</sys_updated_on>
+        <timeline_page/>
+        <title>Job Build Information</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</application>
+        <file_path/>
+        <instance_id>10750c93db688014387021c405961985</instance_id>
+        <instance_name>ecsdev1</instance_name>
+        <name>sys_app_module_1a8aca961b8acc5033fbdbd3cc4bcb2c</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Jenkins v2">b578028e1bca8c5033fbdbd3cc4bcbc7</application><assessment/><device_type/><filter/><hint/><homepage/><image/><link_type>LIST</link_type><map_page/><mobile_title>Job Build Informations</mobile_title><mobile_view_name>Mobile</mobile_view_name><name>x_snc_jenkins_v2_job_build_information</name><order/><override_menu_roles>false</override_menu_roles><query/><report/><roles>x_snc_jenkins_v2.jenkins_admin,x_snc_jenkins_v2.jenkins_user</roles><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-01-02 06:55:38</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>1a8aca961b8acc5033fbdbd3cc4bcb2c</sys_id><sys_mod_count>2</sys_mod_count><sys_name>Job Build Information</sys_name><sys_overrides/><sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package><sys_policy/><sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope><sys_update_name>sys_app_module_1a8aca961b8acc5033fbdbd3cc4bcb2c</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-01-02 07:13:12</sys_updated_on><timeline_page/><title>Job Build Information</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+        <payload_hash>977920530</payload_hash>
+        <record_name>Job Build Information</record_name>
+        <reverted_from/>
+        <source>466af1ca1b8a8c5033fbdbd3cc4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 07:13:12</sys_created_on>
+        <sys_id>ab8ecada1b8acc5033fbdbd3cc4bcb69</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16f6519e1170000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 07:13:12</sys_updated_on>
+        <type>Module</type>
+        <update_guid>e38ecadadf8acc50d4ed536f3e2c5569</update_guid>
+        <update_guid_history>e38ecadadf8acc50d4ed536f3e2c5569:977920530,519cce1a5c8acc50e9fc2539ac959af8:-1630737852,128aca96cb8acc50851daf512378312f:510932176</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Job Build Information">fe4987161b8ecc5033fbdbd3cc4bcbef</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:29:50</sys_created_on>
+        <sys_db_object display_value="" name="sys_app_module">sys_app_module</sys_db_object>
+        <sys_id>185fda1212a24ff683dc75835833d791</sys_id>
+        <sys_metadata>1a8aca961b8acc5033fbdbd3cc4bcb2c</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Job Build Information</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_scope_delete display_value="">0ad188ab51f44da390b97cda915fb7f1</sys_scope_delete>
+        <sys_update_name>sys_app_module_1a8aca961b8acc5033fbdbd3cc4bcb2c</sys_update_name>
+        <sys_update_version display_value="sys_app_module_1a8aca961b8acc5033fbdbd3cc4bcb2c">ab8ecada1b8acc5033fbdbd3cc4bcb69</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:29:50</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
