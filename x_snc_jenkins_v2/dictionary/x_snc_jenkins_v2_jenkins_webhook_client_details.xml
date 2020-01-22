@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Jenkins Webhook Client Details" max_length="40" name="x_snc_jenkins_v2_jenkins_webhook_client_details" sizeclass="1" type="collection">
+        <element label="Authorization Key" mandatory="true" max_length="255" name="authorization_key" type="password2"/>
+        <element label="Name" mandatory="true" max_length="255" name="name" type="string"/>
+    </element>
+</database>
