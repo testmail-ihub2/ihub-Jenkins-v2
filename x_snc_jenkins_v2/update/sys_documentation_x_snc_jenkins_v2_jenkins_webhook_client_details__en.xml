@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="" label="Jenkins Webhook Client Details" language="en" table="x_snc_jenkins_v2_jenkins_webhook_client_details">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element/>
+            <help/>
+            <hint/>
+            <label>Jenkins Webhook Client Details</label>
+            <language>en</language>
+            <name>x_snc_jenkins_v2_jenkins_webhook_client_details</name>
+            <plural>Jenkins Webhook Client Details</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>priytams</sys_created_by>
+            <sys_created_on>2020-01-01 12:08:07</sys_created_on>
+            <sys_id>8e78428e1bca8c5033fbdbd3cc4bcba8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Jenkins Webhook Client Details</sys_name>
+            <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+            <sys_update_name>sys_documentation_x_snc_jenkins_v2_jenkins_webhook_client_details__en</sys_update_name>
+            <sys_updated_by>priytams</sys_updated_by>
+            <sys_updated_on>2020-01-01 12:08:07</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

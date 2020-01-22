@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_complex_object">
+    <sys_complex_object action="INSERT_OR_UPDATE">
+        <label/>
+        <name>FDace6ecc400164490d03aa3219b8faee5</name>
+        <namespace>FlowDesigner</namespace>
+        <scope_name>c66af1ca1b8a8c5033fbdbd3cc4bcb75</scope_name>
+        <serialized_content>{"FlowDesigner:FDace6ecc400164490d03aa3219b8faee5":{"$COCollectionField":[{"job_list":{"name":"String","name.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"name\",\"mandatory\":\"true\",\"order\":\"2\",\"max_length\":\"0\"}"},"class":"String","class.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"class\",\"mandatory\":\"true\",\"order\":\"3\",\"max_length\":\"0\"}"}}}],"$COCollectionField.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"job_lists\",\"mandatory\":\"true\",\"child_name\":\"job_list\",\"uiUniqueId\":\"7a294174-4e5e-47dc-bdc7-b1e994f7b774\",\"uiTypeLabel\":\"Array.Object\",\"co_type_name\":\"FDace6ecc400164490d03aa3219b8faee5\",\"child_label\":\"job_list\",\"child_type_label\":\"Object\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"array.object\",\"child_type\":\"object\",\"order\":\"1\",\"max_length\":\"65000\",\"child_uiUniqueId\":\"d619401f-2a00-4525-bc1a-12c11a848321\"}"},"$COCollectionField.$field_facets":{"SimpleMapFacet":"{\"up-shift-collection-level\":\"true\"}"}},"FlowDesigner:FDace6ecc400164490d03aa3219b8faee5.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"job_lists\",\"mandatory\":\"true\",\"child_name\":\"job_list\",\"uiUniqueId\":\"7a294174-4e5e-47dc-bdc7-b1e994f7b774\",\"uiTypeLabel\":\"Array.Object\",\"co_type_name\":\"FDace6ecc400164490d03aa3219b8faee5\",\"child_label\":\"job_list\",\"child_type_label\":\"Object\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"array.object\",\"child_type\":\"object\",\"order\":\"1\",\"max_length\":\"65000\",\"child_uiUniqueId\":\"d619401f-2a00-4525-bc1a-12c11a848321\"}"}}</serialized_content>
+        <sys_class_name>sys_complex_object</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 10:09:37</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>60e6ecc41b16449033fbdbd3cc4bcbe6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>FDace6ecc400164490d03aa3219b8faee5</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_complex_object_60e6ecc41b16449033fbdbd3cc4bcbe6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 10:09:37</sys_updated_on>
+        <type>complex_object_collection</type>
+    </sys_complex_object>
+</record_update>
