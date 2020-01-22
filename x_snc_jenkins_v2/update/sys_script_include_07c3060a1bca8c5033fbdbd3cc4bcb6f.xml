@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_jenkins_v2.JenkinsUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>JenkinsUtils</name>
+        <script><![CDATA[var JenkinsUtils = Class.create();
+JenkinsUtils.prototype = {
+    initialize: function() {},
+    /**  Params : json object 
+      Functionality : Traverses through all key-value pairs part of the inputs and strips the value of any whitespace which are added inadverently around       the values.
+      Return : updated json object.	*/
+
+    trimStringInputs: function(inputs) {
+        for (var key in inputs) {
+            if (inputs[key] && typeof inputs[key] == 'string') {
+                inputs[key] = inputs[key].trim();
+            }
+        }
+        return inputs;
+    },
+
+    throwError: function(actionName) {
+        switch (actionName) {
+            case 'reload_job':
+                throw new Error("The requested job doesn't exist or inaccessible.");
+
+            case 'get_build_number':
+                throw new Error("The requested job or the selected build status for the job doesn't exists or inaccessible, or the job has no build history.");
+
+            case 'get_build_timestamp':
+                throw new Error("Either build number or job path doesn't exists or not accessible.");
+
+            case 'remove_job_from_view':
+                throw new Error("Provided value for View Path or Job Path is invalid.");
+
+            case 'get_console_output':
+                throw new Error("Either Build Number or Job path doesn't exists or not accessible.");
+
+            case 'get_build_history':
+                throw new Error("Either Job Path and Build Number appears to be invalid or empty.");
+
+            case 'get_all_jobs_from_view':
+                throw new Error("Either Parent Folder Path or View Name doesn't exists or not accessible.");
+
+            case 'get_all_jobs_from_view_view_not_found':
+                throw new Error("Provided View Name does not exist.");
+
+            case 'create_node':
+                throw new Error("Provided value for Number of Executors must be greater than or equal to 1.");
+
+            case 'delete_job':
+                throw new Error("The requested job doesn't exist or inaccessible.");
+            case 'copy_job':
+                throw new Error("Either Destination Job Path or Source Job Path is invalid or not found.");
+
+            case 'get_all_jobs_from_folder':
+                throw new Error("Folder Path doesn't exist or invalid.");
+
+            case 'get_build_information':
+                throw new Error("Either Build Number or Job Path doesn't exist or not accessible.");
+
+            case 'delete_folder':
+                throw new Error("Folder path doesn't exists or not accessible.");
+				
+			case 'create_job':
+				throw new Error("Parent folder path doesn't exists or not accessible.");
+			
+			case 'create_folder' : 
+				throw new Error("Parent folder path doesn't exists or not accessible.");
+			
+			case 'rename_job': 
+				throw new Error("Provided value for Current Job Path is invalid.");
+				
+			case 'add_job_to_view':
+				throw new Error("The value provided for either View Path or Job Path is invalid.");
+        }
+    },
+
+
+    type: 'JenkinsUtils'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:48:08</sys_created_on>
+        <sys_id>07c3060a1bca8c5033fbdbd3cc4bcb6f</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_name>JenkinsUtils</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_script_include_07c3060a1bca8c5033fbdbd3cc4bcb6f</sys_update_name>
+        <sys_updated_by>anamika</sys_updated_by>
+        <sys_updated_on>2020-01-07 07:20:14</sys_updated_on>
+    </sys_script_include>
+</record_update>

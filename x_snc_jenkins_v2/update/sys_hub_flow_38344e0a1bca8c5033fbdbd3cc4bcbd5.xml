@@ -1,0 +1,3007 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category display_value="Build Management">9de1d005db119b00bea7ff561d961977</category>
+        <compiler_build/>
+        <copied_from>ab839aa51bf94cd0e2e2fdd2cd4bcbcd</copied_from>
+        <copied_from_name>Build Jenkins Job</copied_from_name>
+        <description>&lt;p&gt;This subflow is used to build Jenkins Job and retrieves the information.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Inputs:&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;Job Path&lt;/b&gt; - Name of the job to be build. Provide full path in case the job is under a folder. E.g. development-job/Jpetstore_v1.0 .&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Job Parameters&lt;/b&gt; - Provide build parameters if your job is configured to build with several parameters. E.g. id=123,verbosity=high. &lt;/li&gt;
+&lt;/ui&gt;
+&lt;p&gt;&lt;b&gt;Outputs:&lt;/b&gt;&lt;/p&gt;
+&lt;ui&gt;
+&lt;li&gt;&lt;b&gt;Build Completed:&lt;/b&gt; - Will set as "True" if build is completed else "False". &lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Build ID:&lt;/b&gt; - Will be set as Buid ID of job, once build is completed.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Queue ID&lt;/b&gt; - Will be set to queue id  of the job .&lt;/li&gt;  
+&lt;li&gt;&lt;b&gt;Status&lt;/b&gt; - Will be set to “Success" if the request succeeds or “Error" if a failure occurs.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Error Message&lt;/b&gt; - Will be populated when the status is "Error".&lt;/li&gt;
+&lt;/ul&gt;</description>
+        <internal_name>build_jenkins_job</internal_name>
+        <label_cache>[{"name":"c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_completed","label":"2.1.1➛Build Completed","reference_display":"Build Completed","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"3634dde3-5592-4260-b410-5382d218d6c9"}},{"name":"c224869f-85a1-43f3-b090-e9f29dbf5d3d.error_message","label":"2.1.1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"c224869f-85a1-43f3-b090-e9f29dbf5d3d.Status","label":"2.1.1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"c224869f-85a1-43f3-b090-e9f29dbf5d3d.queue_id","label":"2.1.1➛Queue ID","reference_display":"Queue ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"77744f7d-9c0d-4397-ac32-260ee60f84ea"}},{"name":"c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_id","label":"2.1.1➛Build ID","reference_display":"Build ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"63e64640-10c1-4b66-a0f5-776860c02bc1"}},{"name":"fcee511b-0c0b-45fc-b9d0-e65717dfefaa.error_message","label":"1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"fcee511b-0c0b-45fc-b9d0-e65717dfefaa.Status","label":"1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"fcee511b-0c0b-45fc-b9d0-e65717dfefaa.queue_id","label":"1➛Queue ID","reference_display":"Queue ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"c8c52c11-f680-40a5-bb21-52683a5110d4"}},{"name":"38520791-6bed-4fa2-94ce-bc7b2625080a.location","label":"1➛Location","reference_display":"Location","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"c8c52c11-f680-40a5-bb21-52683a5110d4"}},{"name":"38520791-6bed-4fa2-94ce-bc7b2625080a.Status","label":"1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"38520791-6bed-4fa2-94ce-bc7b2625080a.error_message","label":"1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"subflow.job_path","label":"Input➛Job Path","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"0f04a50a-5b3d-458c-b3b6-01f31de8d1ec","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.job_parameters","label":"Input➛Job Parameters","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"cc0dda85-30fd-4fd6-bf40-666b34f8de8f","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"1d2ef78c-0101-4b18-ab35-556cc7285cbb.Status","label":"2➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"1d2ef78c-0101-4b18-ab35-556cc7285cbb.error_message","label":"2➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"3d031fde-989b-489f-86c3-74a47e4ffcb9.Status","label":"2.1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"3d031fde-989b-489f-86c3-74a47e4ffcb9.error_message","label":"2.1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"50c1606e-a201-49af-918d-46444aee553c.Status","label":"2.1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"50c1606e-a201-49af-918d-46444aee553c.error_message","label":"2.1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"b204aa4e-9565-4b9c-b36e-875128691060.waiting_in_queue","label":"2.1➛Waiting in Queue","reference_display":"Waiting in Queue","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"884087de-a03b-4c7a-b959-c64b078b8106"}},{"name":"b204aa4e-9565-4b9c-b36e-875128691060.Status","label":"2.1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"b204aa4e-9565-4b9c-b36e-875128691060.error_message","label":"2.1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"35c26987-fc3d-480a-b589-3413fd6155c2.waiting_in_queue","label":"2.1➛Waiting in Queue","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"884087de-a03b-4c7a-b959-c64b078b8106"}},{"name":"35c26987-fc3d-480a-b589-3413fd6155c2.Status","label":"2.1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"35c26987-fc3d-480a-b589-3413fd6155c2.error_message","label":"2.1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"e53629b1-0434-49a2-a7f2-4d77ee9d7873.build_id","label":"2.1➛Build ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"63e64640-10c1-4b66-a0f5-776860c02bc1"}},{"name":"e53629b1-0434-49a2-a7f2-4d77ee9d7873.queue_id","label":"2.1➛Queue ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"77744f7d-9c0d-4397-ac32-260ee60f84ea"}},{"name":"e53629b1-0434-49a2-a7f2-4d77ee9d7873.Status","label":"2.1➛Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"e53629b1-0434-49a2-a7f2-4d77ee9d7873.error_message","label":"2.1➛Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"38520791-6bed-4fa2-94ce-bc7b2625080a.queue_id","label":"1➛Queue ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"c8c52c11-f680-40a5-bb21-52683a5110d4"}}]</label_cache>
+        <latest_snapshot>67f6773f1bce8054e2e2fdd2cd4bcbbd</latest_snapshot>
+        <master_snapshot>67f6773f1bce8054e2e2fdd2cd4bcbbd</master_snapshot>
+        <name>Build Jenkins Job</name>
+        <natlang/>
+        <outputs/>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:28</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>38344e0a1bca8c5033fbdbd3cc4bcbd5</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>Build Jenkins Job</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_hub_flow_38344e0a1bca8c5033fbdbd3cc4bcbd5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=38344e0a1bca8c5033fbdbd3cc4bcbd5"/>
+    <sys_variable_value action="delete_multiple" query="document_key=38344e0a1bca8c5033fbdbd3cc4bcbd5"/>
+    <sys_hub_flow_component action="delete_multiple" query="flow=38344e0a1bca8c5033fbdbd3cc4bcbd5^sys_idNOT IN07ce439a1b8ecc5033fbdbd3cc4bcb16,0ccb8e421b0e8c5033fbdbd3cc4bcb8b,14cb8e421b0e8c5033fbdbd3cc4bcb8e,48cb8e421b0e8c5033fbdbd3cc4bcb86,9d3e875a1b8ecc5033fbdbd3cc4bcb86"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">4fce439a1b8ecc5033fbdbd3cc4bcb15</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</flow>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:53:53</sys_created_on>
+        <sys_id>07ce439a1b8ecc5033fbdbd3cc4bcb16</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <ui_id>ca346e74-10fe-4ce9-b4cb-3355f15a4d17</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=07ce439a1b8ecc5033fbdbd3cc4bcb16"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>07ce439a1b8ecc5033fbdbd3cc4bcb16</document_key>
+        <order>20</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:53:53</sys_created_on>
+        <sys_id>47ce439a1b8ecc5033fbdbd3cc4bcb19</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:53:53</sys_updated_on>
+        <value>{{fcee511b-0c0b-45fc-b9d0-e65717dfefaa.Status}}=Success</value>
+        <variable display_value="">9a5f5105c32632002841b63b12d3ae46</variable>
+    </sys_variable_value>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Get Build ID">a1ce3d421bca8c5033fbdbd3cc4bcb44</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</flow>
+        <order>2.1.1</order>
+        <parent_ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>0ccb8e421b0e8c5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <ui_id>c224869f-85a1-43f3-b090-e9f29dbf5d3d</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=0ccb8e421b0e8c5033fbdbd3cc4bcb8b"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>0ccb8e421b0e8c5033fbdbd3cc4bcb8b</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>80cb8e421b0e8c5033fbdbd3cc4bcb8d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:22:28</sys_updated_on>
+        <value/>
+        <variable display_value="">29ce3d421bca8c5033fbdbd3cc4bcb48</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=0ccb8e421b0e8c5033fbdbd3cc4bcb8b"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>queue_id</field>
+        <id>0ccb8e421b0e8c5033fbdbd3cc4bcb8b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>00cb8e421b0e8c5033fbdbd3cc4bcb8d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:22:28</sys_updated_on>
+        <table>var__m_sys_hub_action_input_a1ce3d421bca8c5033fbdbd3cc4bcb44</table>
+        <value>{{fcee511b-0c0b-45fc-b9d0-e65717dfefaa.queue_id}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">4ccb8e421b0e8c5033fbdbd3cc4bcb8d</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</flow>
+        <inputs/>
+        <logic_definition display_value="Do the following until">eaeb040687210300e6c2c88fc0e3ec89</logic_definition>
+        <order>2.1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>ca346e74-10fe-4ce9-b4cb-3355f15a4d17</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>14cb8e421b0e8c5033fbdbd3cc4bcb8e</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=14cb8e421b0e8c5033fbdbd3cc4bcb8e"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>14cb8e421b0e8c5033fbdbd3cc4bcb8e</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>14cb8e421b0e8c5033fbdbd3cc4bcb91</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:19</sys_updated_on>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_completed}}=True</value>
+        <variable display_value="">d7138f0473031300612c273ffff6a78c</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>14cb8e421b0e8c5033fbdbd3cc4bcb8e</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:19</sys_created_on>
+        <sys_id>613e875a1b8ecc5033fbdbd3cc4bcb92</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:19</sys_updated_on>
+        <value>JOB build is completed</value>
+        <variable display_value="">bda2cb0473031300612c273ffff6a750</variable>
+    </sys_variable_value>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Perform a Build">23defd421bca8c5033fbdbd3cc4bcb42</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>48cb8e421b0e8c5033fbdbd3cc4bcb86</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <ui_id>fcee511b-0c0b-45fc-b9d0-e65717dfefaa</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=48cb8e421b0e8c5033fbdbd3cc4bcb86"/>
+    <sys_element_mapping action="delete_multiple" query="id=48cb8e421b0e8c5033fbdbd3cc4bcb86"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_job_parameters</field>
+        <id>48cb8e421b0e8c5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>48cb8e421b0e8c5033fbdbd3cc4bcb88</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:22:28</sys_updated_on>
+        <table>var__m_sys_hub_action_input_23defd421bca8c5033fbdbd3cc4bcb42</table>
+        <value>{{subflow.job_parameters}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_job_path</field>
+        <id>48cb8e421b0e8c5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>00cb8e421b0e8c5033fbdbd3cc4bcb89</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:22:28</sys_updated_on>
+        <table>var__m_sys_hub_action_input_23defd421bca8c5033fbdbd3cc4bcb42</table>
+        <value>{{subflow.job_path}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">d13e875a1b8ecc5033fbdbd3cc4bcb86</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</flow>
+        <inputs/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2.1.2</order>
+        <outputs_assigned>build_id,queue_id,status,error_message,build_completed</outputs_assigned>
+        <outputs_to_assign/>
+        <outputs_to_assign/>
+        <parent_ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <ui_id>de025e39-0e9a-4d54-a778-51a994ddeb93</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=9d3e875a1b8ecc5033fbdbd3cc4bcb86"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>9d3e875a1b8ecc5033fbdbd3cc4bcb86</document_key>
+        <order>5</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>213e875a1b8ecc5033fbdbd3cc4bcb8c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <value/>
+        <variable display_value="">9d3e875a1b8ecc5033fbdbd3cc4bcb75</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>9d3e875a1b8ecc5033fbdbd3cc4bcb86</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>6d3e875a1b8ecc5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <value/>
+        <variable display_value="">78344e0a1bca8c5033fbdbd3cc4bcbf8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>9d3e875a1b8ecc5033fbdbd3cc4bcb86</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>e13e875a1b8ecc5033fbdbd3cc4bcb8c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <value/>
+        <variable display_value="">89348e0a1bca8c5033fbdbd3cc4bcb02</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=9d3e875a1b8ecc5033fbdbd3cc4bcb86"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>build_completed</field>
+        <id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>a13e875a1b8ecc5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_completed}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>build_id</field>
+        <id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>653e875a1b8ecc5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>error_message</field>
+        <id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>ed3e875a1b8ecc5033fbdbd3cc4bcb8a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.error_message}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>queue_id</field>
+        <id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>293e875a1b8ecc5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.queue_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>status</field>
+        <id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>e93e875a1b8ecc5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.Status}}</value>
+    </sys_element_mapping>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=38344e0a1bca8c5033fbdbd3cc4bcbd5^sys_idNOT IN34344e0a1bca8c5033fbdbd3cc4bcbd8"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>38344e0a1bca8c5033fbdbd3cc4bcbd5</id>
+        <name>Build Jenkins Job</name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:28</sys_created_on>
+        <sys_id>34344e0a1bca8c5033fbdbd3cc4bcbd8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:28</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_hub_flow_input action="delete_multiple" query="model=38344e0a1bca8c5033fbdbd3cc4bcbd5^sys_idNOT IN7c344e0a1bca8c5033fbdbd3cc4bcbf0,fc344e0a1bca8c5033fbdbd3cc4bcbe9"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=cc0dda85-30fd-4fd6-bf40-666b34f8de8f</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>job_parameters</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Job Parameters</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</model>
+        <model_id>38344e0a1bca8c5033fbdbd3cc4bcbd5</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:28</sys_created_on>
+        <sys_id>7c344e0a1bca8c5033fbdbd3cc4bcbf0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=0f04a50a-5b3d-458c-b3b6-01f31de8d1ec</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>job_path</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Job Path</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</model>
+        <model_id>38344e0a1bca8c5033fbdbd3cc4bcbd5</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:28</sys_created_on>
+        <sys_id>fc344e0a1bca8c5033fbdbd3cc4bcbe9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=38344e0a1bca8c5033fbdbd3cc4bcbd5^sys_idNOT IN09348e0a1bca8c5033fbdbd3cc4bcb14,49348e0a1bca8c5033fbdbd3cc4bcb0b,78344e0a1bca8c5033fbdbd3cc4bcbf8,89348e0a1bca8c5033fbdbd3cc4bcb02,9d3e875a1b8ecc5033fbdbd3cc4bcb75"/>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=5c61060f-4ad2-435a-ab13-e83c0fef755f</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>error_message</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Error Message</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</model>
+        <model_id>38344e0a1bca8c5033fbdbd3cc4bcbd5</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <next_element/>
+        <order>4</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:29</sys_created_on>
+        <sys_id>09348e0a1bca8c5033fbdbd3cc4bcb14</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:29</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=474f4f9c-59b2-4be6-9034-76a750a822ac</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>status</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Status</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</model>
+        <model_id>38344e0a1bca8c5033fbdbd3cc4bcbd5</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:29</sys_created_on>
+        <sys_id>49348e0a1bca8c5033fbdbd3cc4bcb0b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:29</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=25310991-0d3a-4176-af80-545083a91fc3</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>build_id</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>Build ID</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</model>
+        <model_id>38344e0a1bca8c5033fbdbd3cc4bcbd5</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:29</sys_created_on>
+        <sys_id>78344e0a1bca8c5033fbdbd3cc4bcbf8</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:29</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=7d7fcebe-5f12-4cae-a10b-443cabe0cff1</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>queue_id</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>Queue ID</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</model>
+        <model_id>38344e0a1bca8c5033fbdbd3cc4bcbd5</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:29</sys_created_on>
+        <sys_id>89348e0a1bca8c5033fbdbd3cc4bcb02</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:29</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=choice,uiTypeLabel=Choice,uiUniqueId=58443d61-d082-45a2-9144-a87313723644</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>False</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>build_completed</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Choice">choice</internal_type>
+        <label>Build Completed</label>
+        <mandatory>false</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</model>
+        <model_id>38344e0a1bca8c5033fbdbd3cc4bcbd5</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <next_element/>
+        <order>5</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>9d3e875a1b8ecc5033fbdbd3cc4bcb75</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_action_instance action="delete_multiple" query="flow=38344e0a1bca8c5033fbdbd3cc4bcbd5^sys_idNOT IN0ccb8e421b0e8c5033fbdbd3cc4bcb8b,48cb8e421b0e8c5033fbdbd3cc4bcb86"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Get Build ID">a1ce3d421bca8c5033fbdbd3cc4bcb44</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</flow>
+        <order>2.1.1</order>
+        <parent_ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>0ccb8e421b0e8c5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <ui_id>c224869f-85a1-43f3-b090-e9f29dbf5d3d</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=0ccb8e421b0e8c5033fbdbd3cc4bcb8b"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>0ccb8e421b0e8c5033fbdbd3cc4bcb8b</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>80cb8e421b0e8c5033fbdbd3cc4bcb8d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:22:28</sys_updated_on>
+        <value/>
+        <variable display_value="">29ce3d421bca8c5033fbdbd3cc4bcb48</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=0ccb8e421b0e8c5033fbdbd3cc4bcb8b"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>queue_id</field>
+        <id>0ccb8e421b0e8c5033fbdbd3cc4bcb8b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>00cb8e421b0e8c5033fbdbd3cc4bcb8d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:22:28</sys_updated_on>
+        <table>var__m_sys_hub_action_input_a1ce3d421bca8c5033fbdbd3cc4bcb44</table>
+        <value>{{fcee511b-0c0b-45fc-b9d0-e65717dfefaa.queue_id}}</value>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Perform a Build">23defd421bca8c5033fbdbd3cc4bcb42</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>48cb8e421b0e8c5033fbdbd3cc4bcb86</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <ui_id>fcee511b-0c0b-45fc-b9d0-e65717dfefaa</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=48cb8e421b0e8c5033fbdbd3cc4bcb86"/>
+    <sys_element_mapping action="delete_multiple" query="id=48cb8e421b0e8c5033fbdbd3cc4bcb86"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_job_parameters</field>
+        <id>48cb8e421b0e8c5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>48cb8e421b0e8c5033fbdbd3cc4bcb88</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:22:28</sys_updated_on>
+        <table>var__m_sys_hub_action_input_23defd421bca8c5033fbdbd3cc4bcb42</table>
+        <value>{{subflow.job_parameters}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_job_path</field>
+        <id>48cb8e421b0e8c5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>00cb8e421b0e8c5033fbdbd3cc4bcb89</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-01 12:22:28</sys_updated_on>
+        <table>var__m_sys_hub_action_input_23defd421bca8c5033fbdbd3cc4bcb42</table>
+        <value>{{subflow.job_path}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=38344e0a1bca8c5033fbdbd3cc4bcbd5^sys_idNOT IN07ce439a1b8ecc5033fbdbd3cc4bcb16,14cb8e421b0e8c5033fbdbd3cc4bcb8e,9d3e875a1b8ecc5033fbdbd3cc4bcb86"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">4fce439a1b8ecc5033fbdbd3cc4bcb15</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</flow>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:53:53</sys_created_on>
+        <sys_id>07ce439a1b8ecc5033fbdbd3cc4bcb16</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <ui_id>ca346e74-10fe-4ce9-b4cb-3355f15a4d17</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=07ce439a1b8ecc5033fbdbd3cc4bcb16"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>07ce439a1b8ecc5033fbdbd3cc4bcb16</document_key>
+        <order>20</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:53:53</sys_created_on>
+        <sys_id>47ce439a1b8ecc5033fbdbd3cc4bcb19</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:53:53</sys_updated_on>
+        <value>{{fcee511b-0c0b-45fc-b9d0-e65717dfefaa.Status}}=Success</value>
+        <variable display_value="">9a5f5105c32632002841b63b12d3ae46</variable>
+    </sys_variable_value>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">4ccb8e421b0e8c5033fbdbd3cc4bcb8d</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</flow>
+        <inputs/>
+        <logic_definition display_value="Do the following until">eaeb040687210300e6c2c88fc0e3ec89</logic_definition>
+        <order>2.1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>ca346e74-10fe-4ce9-b4cb-3355f15a4d17</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>14cb8e421b0e8c5033fbdbd3cc4bcb8e</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=14cb8e421b0e8c5033fbdbd3cc4bcb8e"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>14cb8e421b0e8c5033fbdbd3cc4bcb8e</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-01 12:22:28</sys_created_on>
+        <sys_id>14cb8e421b0e8c5033fbdbd3cc4bcb91</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:19</sys_updated_on>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_completed}}=True</value>
+        <variable display_value="">d7138f0473031300612c273ffff6a78c</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>14cb8e421b0e8c5033fbdbd3cc4bcb8e</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:19</sys_created_on>
+        <sys_id>613e875a1b8ecc5033fbdbd3cc4bcb92</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:19</sys_updated_on>
+        <value>JOB build is completed</value>
+        <variable display_value="">bda2cb0473031300612c273ffff6a750</variable>
+    </sys_variable_value>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">d13e875a1b8ecc5033fbdbd3cc4bcb86</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</flow>
+        <inputs/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2.1.2</order>
+        <outputs_assigned>build_id,queue_id,status,error_message,build_completed</outputs_assigned>
+        <outputs_to_assign/>
+        <outputs_to_assign/>
+        <parent_ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:27</sys_updated_on>
+        <ui_id>de025e39-0e9a-4d54-a778-51a994ddeb93</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=9d3e875a1b8ecc5033fbdbd3cc4bcb86"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>9d3e875a1b8ecc5033fbdbd3cc4bcb86</document_key>
+        <order>5</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>213e875a1b8ecc5033fbdbd3cc4bcb8c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <value/>
+        <variable display_value="">9d3e875a1b8ecc5033fbdbd3cc4bcb75</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>9d3e875a1b8ecc5033fbdbd3cc4bcb86</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>6d3e875a1b8ecc5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <value/>
+        <variable display_value="">78344e0a1bca8c5033fbdbd3cc4bcbf8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>9d3e875a1b8ecc5033fbdbd3cc4bcb86</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>e13e875a1b8ecc5033fbdbd3cc4bcb8c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <value/>
+        <variable display_value="">89348e0a1bca8c5033fbdbd3cc4bcb02</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=9d3e875a1b8ecc5033fbdbd3cc4bcb86"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>build_completed</field>
+        <id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>a13e875a1b8ecc5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_completed}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>build_id</field>
+        <id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>653e875a1b8ecc5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>error_message</field>
+        <id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>ed3e875a1b8ecc5033fbdbd3cc4bcb8a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.error_message}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>queue_id</field>
+        <id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>293e875a1b8ecc5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.queue_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>status</field>
+        <id>9d3e875a1b8ecc5033fbdbd3cc4bcb86</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>e93e875a1b8ecc5033fbdbd3cc4bcb8b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.Status}}</value>
+    </sys_element_mapping>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_38344e0a1bca8c5033fbdbd3cc4bcbd5^sys_idNOT INb4344e0a1bca8c5033fbdbd3cc4bcbef,f4344e0a1bca8c5033fbdbd3cc4bcbf5"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>job_path</element>
+        <help/>
+        <hint/>
+        <label>Job Path</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:28</sys_created_on>
+        <sys_id>b4344e0a1bca8c5033fbdbd3cc4bcbef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:28</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>job_parameters</element>
+        <help/>
+        <hint/>
+        <label>Job Parameters</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:28</sys_created_on>
+        <sys_id>f4344e0a1bca8c5033fbdbd3cc4bcbf5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:28</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5^sys_idNOT IN01348e0a1bca8c5033fbdbd3cc4bcb1c,113e875a1b8ecc5033fbdbd3cc4bcb7f,41348e0a1bca8c5033fbdbd3cc4bcb13,81348e0a1bca8c5033fbdbd3cc4bcb0a,c1348e0a1bca8c5033fbdbd3cc4bcb01"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>error_message</element>
+        <help/>
+        <hint/>
+        <label>Error Message</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:29</sys_created_on>
+        <sys_id>01348e0a1bca8c5033fbdbd3cc4bcb1c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:29</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>build_completed</element>
+        <help/>
+        <hint/>
+        <label>Build Completed</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+        <sys_id>113e875a1b8ecc5033fbdbd3cc4bcb7f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>status</element>
+        <help/>
+        <hint/>
+        <label>Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:29</sys_created_on>
+        <sys_id>41348e0a1bca8c5033fbdbd3cc4bcb13</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:29</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>queue_id</element>
+        <help/>
+        <hint/>
+        <label>Queue ID</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:29</sys_created_on>
+        <sys_id>81348e0a1bca8c5033fbdbd3cc4bcb0a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:29</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>build_id</element>
+        <help/>
+        <hint/>
+        <label>Build ID</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:49:29</sys_created_on>
+        <sys_id>c1348e0a1bca8c5033fbdbd3cc4bcb01</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>priytams</sys_updated_by>
+        <sys_updated_on>2020-01-01 11:49:29</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5^sys_idNOT IN953e875a1b8ecc5033fbdbd3cc4bcb79,513e875a1b8ecc5033fbdbd3cc4bcb7a"/>
+    <sys_choice field="build_completed" table="var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>build_completed</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>True</label>
+            <language>en</language>
+            <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>953e875a1b8ecc5033fbdbd3cc4bcb79</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+            <value>True</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>build_completed</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>False</label>
+            <language>en</language>
+            <name>var__m_sys_hub_flow_output_38344e0a1bca8c5033fbdbd3cc4bcbd5</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-01-02 11:51:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>513e875a1b8ecc5033fbdbd3cc4bcb7a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-01-02 11:51:18</sys_updated_on>
+            <value>False</value>
+        </sys_choice>
+    </sys_choice>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=38344e0a1bca8c5033fbdbd3cc4bcbd5^sys_idNOT INe807f73f1bce8054e2e2fdd2cd4bcb64"/>
+    <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
+        <plan>com.snc.process_flow.engine.ProcessPlan@82e265</plan>
+        <plan_id display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</plan_id>
+        <snapshot>67f6773f1bce8054e2e2fdd2cd4bcbbd</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:26</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>e807f73f1bce8054e2e2fdd2cd4bcb64</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:26</sys_updated_on>
+    </sys_flow_subflow_plan>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category display_value="Build Management">9de1d005db119b00bea7ff561d961977</category>
+        <copied_from/>
+        <copied_from_name/>
+        <description>&lt;p&gt;This subflow is used to build Jenkins Job and retrieves the information.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Inputs:&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;Job Path&lt;/b&gt; - Name of the job to be build. Provide full path in case the job is under a folder. E.g. development-job/Jpetstore_v1.0 .&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Job Parameters&lt;/b&gt; - Provide build parameters if your job is configured to build with several parameters. E.g. id=123,verbosity=high. &lt;/li&gt;
+&lt;/ui&gt;
+&lt;p&gt;&lt;b&gt;Outputs:&lt;/b&gt;&lt;/p&gt;
+&lt;ui&gt;
+&lt;li&gt;&lt;b&gt;Build Completed:&lt;/b&gt; - Will set as "True" if build is completed else "False". &lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Build ID:&lt;/b&gt; - Will be set as Buid ID of job, once build is completed.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Queue ID&lt;/b&gt; - Will be set to queue id  of the job .&lt;/li&gt;  
+&lt;li&gt;&lt;b&gt;Status&lt;/b&gt; - Will be set to “Success" if the request succeeds or “Error" if a failure occurs.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Error Message&lt;/b&gt; - Will be populated when the status is "Error".&lt;/li&gt;
+&lt;/ul&gt;</description>
+        <internal_name>build_jenkins_job</internal_name>
+        <label_cache>[{"name":"c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_completed","label":"2.1.1➛Build Completed","reference_display":"Build Completed","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"3634dde3-5592-4260-b410-5382d218d6c9"}},{"name":"c224869f-85a1-43f3-b090-e9f29dbf5d3d.error_message","label":"2.1.1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"c224869f-85a1-43f3-b090-e9f29dbf5d3d.Status","label":"2.1.1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"c224869f-85a1-43f3-b090-e9f29dbf5d3d.queue_id","label":"2.1.1➛Queue ID","reference_display":"Queue ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"77744f7d-9c0d-4397-ac32-260ee60f84ea"}},{"name":"c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_id","label":"2.1.1➛Build ID","reference_display":"Build ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"63e64640-10c1-4b66-a0f5-776860c02bc1"}},{"name":"fcee511b-0c0b-45fc-b9d0-e65717dfefaa.error_message","label":"1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"fcee511b-0c0b-45fc-b9d0-e65717dfefaa.Status","label":"1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"fcee511b-0c0b-45fc-b9d0-e65717dfefaa.queue_id","label":"1➛Queue ID","reference_display":"Queue ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"c8c52c11-f680-40a5-bb21-52683a5110d4"}},{"name":"38520791-6bed-4fa2-94ce-bc7b2625080a.location","label":"1➛Location","reference_display":"Location","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"c8c52c11-f680-40a5-bb21-52683a5110d4"}},{"name":"38520791-6bed-4fa2-94ce-bc7b2625080a.Status","label":"1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"38520791-6bed-4fa2-94ce-bc7b2625080a.error_message","label":"1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"subflow.job_path","label":"Input➛Job Path","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"0f04a50a-5b3d-458c-b3b6-01f31de8d1ec","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.job_parameters","label":"Input➛Job Parameters","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"cc0dda85-30fd-4fd6-bf40-666b34f8de8f","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"1d2ef78c-0101-4b18-ab35-556cc7285cbb.Status","label":"2➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"1d2ef78c-0101-4b18-ab35-556cc7285cbb.error_message","label":"2➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"3d031fde-989b-489f-86c3-74a47e4ffcb9.Status","label":"2.1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"3d031fde-989b-489f-86c3-74a47e4ffcb9.error_message","label":"2.1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"50c1606e-a201-49af-918d-46444aee553c.Status","label":"2.1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"50c1606e-a201-49af-918d-46444aee553c.error_message","label":"2.1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"b204aa4e-9565-4b9c-b36e-875128691060.waiting_in_queue","label":"2.1➛Waiting in Queue","reference_display":"Waiting in Queue","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"884087de-a03b-4c7a-b959-c64b078b8106"}},{"name":"b204aa4e-9565-4b9c-b36e-875128691060.Status","label":"2.1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"b204aa4e-9565-4b9c-b36e-875128691060.error_message","label":"2.1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"35c26987-fc3d-480a-b589-3413fd6155c2.waiting_in_queue","label":"2.1➛Waiting in Queue","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"884087de-a03b-4c7a-b959-c64b078b8106"}},{"name":"35c26987-fc3d-480a-b589-3413fd6155c2.Status","label":"2.1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"35c26987-fc3d-480a-b589-3413fd6155c2.error_message","label":"2.1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"e53629b1-0434-49a2-a7f2-4d77ee9d7873.build_id","label":"2.1➛Build ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"63e64640-10c1-4b66-a0f5-776860c02bc1"}},{"name":"e53629b1-0434-49a2-a7f2-4d77ee9d7873.queue_id","label":"2.1➛Queue ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"77744f7d-9c0d-4397-ac32-260ee60f84ea"}},{"name":"e53629b1-0434-49a2-a7f2-4d77ee9d7873.Status","label":"2.1➛Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"067d2960-93e0-495c-bf54-4ef7139c9265"}},{"name":"e53629b1-0434-49a2-a7f2-4d77ee9d7873.error_message","label":"2.1➛Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"62f46b10-b6a0-46f2-8773-f914223185c2"}},{"name":"38520791-6bed-4fa2-94ce-bc7b2625080a.queue_id","label":"1➛Queue ID","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"c8c52c11-f680-40a5-bb21-52683a5110d4"}}]</label_cache>
+        <master>true</master>
+        <name>Build Jenkins Job</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Build Jenkins Job">38344e0a1bca8c5033fbdbd3cc4bcbd5</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:22</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>67f6773f1bce8054e2e2fdd2cd4bcbbd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:22</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=67f6773f1bce8054e2e2fdd2cd4bcbbd"/>
+    <sys_variable_value action="delete_multiple" query="document_key=67f6773f1bce8054e2e2fdd2cd4bcbbd"/>
+    <sys_hub_flow_component action="delete_multiple" query="flow=67f6773f1bce8054e2e2fdd2cd4bcbbd^sys_idNOT IN0807b73f1bce8054e2e2fdd2cd4bcbd0,0807b73f1bce8054e2e2fdd2cd4bcbd9,4807b73f1bce8054e2e2fdd2cd4bcbcc,8c07b73f1bce8054e2e2fdd2cd4bcbc5,c407b73f1bce8054e2e2fdd2cd4bcbe2"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">4fce439a1b8ecc5033fbdbd3cc4bcb15</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</flow>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>0807b73f1bce8054e2e2fdd2cd4bcbd0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <ui_id>ca346e74-10fe-4ce9-b4cb-3355f15a4d17</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=0807b73f1bce8054e2e2fdd2cd4bcbd0"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>0807b73f1bce8054e2e2fdd2cd4bcbd0</document_key>
+        <order>20</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>0807b73f1bce8054e2e2fdd2cd4bcbd3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value>{{fcee511b-0c0b-45fc-b9d0-e65717dfefaa.Status}}=Success</value>
+        <variable display_value="">9a5f5105c32632002841b63b12d3ae46</variable>
+    </sys_variable_value>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Perform a Build">f1b6fbfb1bce8054e2e2fdd2cd4bcb77</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot>23defd421bca8c5033fbdbd3cc4bcb42</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>0807b73f1bce8054e2e2fdd2cd4bcbd9</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <ui_id>fcee511b-0c0b-45fc-b9d0-e65717dfefaa</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=0807b73f1bce8054e2e2fdd2cd4bcbd9"/>
+    <sys_element_mapping action="delete_multiple" query="id=0807b73f1bce8054e2e2fdd2cd4bcbd9"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_job_parameters</field>
+        <id>0807b73f1bce8054e2e2fdd2cd4bcbd9</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>8007b73f1bce8054e2e2fdd2cd4bcbdb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f1b6fbfb1bce8054e2e2fdd2cd4bcb77</table>
+        <value>{{subflow.job_parameters}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_job_path</field>
+        <id>0807b73f1bce8054e2e2fdd2cd4bcbd9</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>4407b73f1bce8054e2e2fdd2cd4bcbdb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f1b6fbfb1bce8054e2e2fdd2cd4bcb77</table>
+        <value>{{subflow.job_path}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">4ccb8e421b0e8c5033fbdbd3cc4bcb8d</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</flow>
+        <inputs/>
+        <logic_definition display_value="Do the following until">eaeb040687210300e6c2c88fc0e3ec89</logic_definition>
+        <order>2.1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>ca346e74-10fe-4ce9-b4cb-3355f15a4d17</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>4807b73f1bce8054e2e2fdd2cd4bcbcc</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=4807b73f1bce8054e2e2fdd2cd4bcbcc"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>4807b73f1bce8054e2e2fdd2cd4bcbcc</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>8807b73f1bce8054e2e2fdd2cd4bcbcf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value>JOB build is completed</value>
+        <variable display_value="">bda2cb0473031300612c273ffff6a750</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>4807b73f1bce8054e2e2fdd2cd4bcbcc</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>c407b73f1bce8054e2e2fdd2cd4bcbcf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_completed}}=True</value>
+        <variable display_value="">d7138f0473031300612c273ffff6a78c</variable>
+    </sys_variable_value>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">d13e875a1b8ecc5033fbdbd3cc4bcb86</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</flow>
+        <inputs/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2.1.2</order>
+        <outputs_assigned>build_id,queue_id,status,error_message,build_completed</outputs_assigned>
+        <outputs_to_assign/>
+        <outputs_to_assign/>
+        <parent_ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <ui_id>de025e39-0e9a-4d54-a778-51a994ddeb93</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=8c07b73f1bce8054e2e2fdd2cd4bcbc5"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>8c07b73f1bce8054e2e2fdd2cd4bcbc5</document_key>
+        <order>5</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>0807b73f1bce8054e2e2fdd2cd4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value/>
+        <variable display_value="">fff6b73f1bce8054e2e2fdd2cd4bcbb2</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>8c07b73f1bce8054e2e2fdd2cd4bcbc5</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>4407b73f1bce8054e2e2fdd2cd4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value/>
+        <variable display_value="">fbf6b73f1bce8054e2e2fdd2cd4bcb72</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>8c07b73f1bce8054e2e2fdd2cd4bcbc5</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>c807b73f1bce8054e2e2fdd2cd4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value/>
+        <variable display_value="">b7f6b73f1bce8054e2e2fdd2cd4bcb80</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=8c07b73f1bce8054e2e2fdd2cd4bcbc5"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>build_completed</field>
+        <id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>8807b73f1bce8054e2e2fdd2cd4bcbca</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_completed}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>build_id</field>
+        <id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>4c07b73f1bce8054e2e2fdd2cd4bcbca</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>error_message</field>
+        <id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>c407b73f1bce8054e2e2fdd2cd4bcbca</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.error_message}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>queue_id</field>
+        <id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>0007b73f1bce8054e2e2fdd2cd4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.queue_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>status</field>
+        <id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>c007b73f1bce8054e2e2fdd2cd4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.Status}}</value>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Get Build ID">82d477b71bce8054e2e2fdd2cd4bcb93</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot>a1ce3d421bca8c5033fbdbd3cc4bcb44</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</flow>
+        <order>2.1.1</order>
+        <parent_ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>c407b73f1bce8054e2e2fdd2cd4bcbe2</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <ui_id>c224869f-85a1-43f3-b090-e9f29dbf5d3d</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=c407b73f1bce8054e2e2fdd2cd4bcbe2"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>c407b73f1bce8054e2e2fdd2cd4bcbe2</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>4c07b73f1bce8054e2e2fdd2cd4bcbe3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <value/>
+        <variable display_value="">82d477b71bce8054e2e2fdd2cd4bcb94</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=c407b73f1bce8054e2e2fdd2cd4bcbe2"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>queue_id</field>
+        <id>c407b73f1bce8054e2e2fdd2cd4bcbe2</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>c807b73f1bce8054e2e2fdd2cd4bcbe3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <table>var__m_sys_hub_action_input_82d477b71bce8054e2e2fdd2cd4bcb93</table>
+        <value>{{fcee511b-0c0b-45fc-b9d0-e65717dfefaa.queue_id}}</value>
+    </sys_element_mapping>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=67f6773f1bce8054e2e2fdd2cd4bcbbd^sys_idNOT INe3f6773f1bce8054e2e2fdd2cd4bcbbe"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>67f6773f1bce8054e2e2fdd2cd4bcbbd</id>
+        <name>Build Jenkins Job</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:22</sys_created_on>
+        <sys_id>e3f6773f1bce8054e2e2fdd2cd4bcbbe</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:22</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_hub_flow_input action="delete_multiple" query="model=67f6773f1bce8054e2e2fdd2cd4bcbbd^sys_idNOT IN2bf6773f1bce8054e2e2fdd2cd4bcbbf,2bf6b73f1bce8054e2e2fdd2cd4bcb67"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=0f04a50a-5b3d-458c-b3b6-01f31de8d1ec</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>job_path</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Job Path</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</model>
+        <model_id>67f6773f1bce8054e2e2fdd2cd4bcbbd</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:22</sys_created_on>
+        <sys_id>2bf6773f1bce8054e2e2fdd2cd4bcbbf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:22</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=cc0dda85-30fd-4fd6-bf40-666b34f8de8f</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>job_parameters</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Job Parameters</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</model>
+        <model_id>67f6773f1bce8054e2e2fdd2cd4bcbbd</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:23</sys_created_on>
+        <sys_id>2bf6b73f1bce8054e2e2fdd2cd4bcb67</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:23</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=67f6773f1bce8054e2e2fdd2cd4bcbbd^sys_idNOT INb3f6b73f1bce8054e2e2fdd2cd4bcba6,b7f6b73f1bce8054e2e2fdd2cd4bcb80,f7f6b73f1bce8054e2e2fdd2cd4bcb99,fbf6b73f1bce8054e2e2fdd2cd4bcb72,fff6b73f1bce8054e2e2fdd2cd4bcbb2"/>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=5c61060f-4ad2-435a-ab13-e83c0fef755f</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>error_message</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Error Message</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</model>
+        <model_id>67f6773f1bce8054e2e2fdd2cd4bcbbd</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <next_element/>
+        <order>4</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>b3f6b73f1bce8054e2e2fdd2cd4bcba6</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=7d7fcebe-5f12-4cae-a10b-443cabe0cff1</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>queue_id</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>Queue ID</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</model>
+        <model_id>67f6773f1bce8054e2e2fdd2cd4bcbbd</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:23</sys_created_on>
+        <sys_id>b7f6b73f1bce8054e2e2fdd2cd4bcb80</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:23</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=474f4f9c-59b2-4be6-9034-76a750a822ac</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>status</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Status</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</model>
+        <model_id>67f6773f1bce8054e2e2fdd2cd4bcbbd</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:23</sys_created_on>
+        <sys_id>f7f6b73f1bce8054e2e2fdd2cd4bcb99</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=25310991-0d3a-4176-af80-545083a91fc3</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>build_id</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>Build ID</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</model>
+        <model_id>67f6773f1bce8054e2e2fdd2cd4bcbbd</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:23</sys_created_on>
+        <sys_id>fbf6b73f1bce8054e2e2fdd2cd4bcb72</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:23</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=choice,uiTypeLabel=Choice,uiUniqueId=58443d61-d082-45a2-9144-a87313723644</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>False</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>build_completed</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Choice">choice</internal_type>
+        <label>Build Completed</label>
+        <mandatory>false</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</model>
+        <model_id>67f6773f1bce8054e2e2fdd2cd4bcbbd</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <next_element/>
+        <order>5</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>fff6b73f1bce8054e2e2fdd2cd4bcbb2</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_action_instance action="delete_multiple" query="flow=67f6773f1bce8054e2e2fdd2cd4bcbbd^sys_idNOT IN0807b73f1bce8054e2e2fdd2cd4bcbd9,c407b73f1bce8054e2e2fdd2cd4bcbe2"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Perform a Build">f1b6fbfb1bce8054e2e2fdd2cd4bcb77</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot>23defd421bca8c5033fbdbd3cc4bcb42</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>0807b73f1bce8054e2e2fdd2cd4bcbd9</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <ui_id>fcee511b-0c0b-45fc-b9d0-e65717dfefaa</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=0807b73f1bce8054e2e2fdd2cd4bcbd9"/>
+    <sys_element_mapping action="delete_multiple" query="id=0807b73f1bce8054e2e2fdd2cd4bcbd9"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_job_parameters</field>
+        <id>0807b73f1bce8054e2e2fdd2cd4bcbd9</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>8007b73f1bce8054e2e2fdd2cd4bcbdb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f1b6fbfb1bce8054e2e2fdd2cd4bcb77</table>
+        <value>{{subflow.job_parameters}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_job_path</field>
+        <id>0807b73f1bce8054e2e2fdd2cd4bcbd9</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>4407b73f1bce8054e2e2fdd2cd4bcbdb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f1b6fbfb1bce8054e2e2fdd2cd4bcb77</table>
+        <value>{{subflow.job_path}}</value>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Get Build ID">82d477b71bce8054e2e2fdd2cd4bcb93</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot>a1ce3d421bca8c5033fbdbd3cc4bcb44</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</flow>
+        <order>2.1.1</order>
+        <parent_ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>c407b73f1bce8054e2e2fdd2cd4bcbe2</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <ui_id>c224869f-85a1-43f3-b090-e9f29dbf5d3d</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=c407b73f1bce8054e2e2fdd2cd4bcbe2"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>c407b73f1bce8054e2e2fdd2cd4bcbe2</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>4c07b73f1bce8054e2e2fdd2cd4bcbe3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <value/>
+        <variable display_value="">82d477b71bce8054e2e2fdd2cd4bcb94</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=c407b73f1bce8054e2e2fdd2cd4bcbe2"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>queue_id</field>
+        <id>c407b73f1bce8054e2e2fdd2cd4bcbe2</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:25</sys_created_on>
+        <sys_id>c807b73f1bce8054e2e2fdd2cd4bcbe3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:25</sys_updated_on>
+        <table>var__m_sys_hub_action_input_82d477b71bce8054e2e2fdd2cd4bcb93</table>
+        <value>{{fcee511b-0c0b-45fc-b9d0-e65717dfefaa.queue_id}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=67f6773f1bce8054e2e2fdd2cd4bcbbd^sys_idNOT IN0807b73f1bce8054e2e2fdd2cd4bcbd0,4807b73f1bce8054e2e2fdd2cd4bcbcc,8c07b73f1bce8054e2e2fdd2cd4bcbc5"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">4fce439a1b8ecc5033fbdbd3cc4bcb15</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</flow>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>0807b73f1bce8054e2e2fdd2cd4bcbd0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <ui_id>ca346e74-10fe-4ce9-b4cb-3355f15a4d17</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=0807b73f1bce8054e2e2fdd2cd4bcbd0"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>0807b73f1bce8054e2e2fdd2cd4bcbd0</document_key>
+        <order>20</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>0807b73f1bce8054e2e2fdd2cd4bcbd3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value>{{fcee511b-0c0b-45fc-b9d0-e65717dfefaa.Status}}=Success</value>
+        <variable display_value="">9a5f5105c32632002841b63b12d3ae46</variable>
+    </sys_variable_value>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">4ccb8e421b0e8c5033fbdbd3cc4bcb8d</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</flow>
+        <inputs/>
+        <logic_definition display_value="Do the following until">eaeb040687210300e6c2c88fc0e3ec89</logic_definition>
+        <order>2.1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>ca346e74-10fe-4ce9-b4cb-3355f15a4d17</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>4807b73f1bce8054e2e2fdd2cd4bcbcc</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=4807b73f1bce8054e2e2fdd2cd4bcbcc"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>4807b73f1bce8054e2e2fdd2cd4bcbcc</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>8807b73f1bce8054e2e2fdd2cd4bcbcf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value>JOB build is completed</value>
+        <variable display_value="">bda2cb0473031300612c273ffff6a750</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>4807b73f1bce8054e2e2fdd2cd4bcbcc</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>c407b73f1bce8054e2e2fdd2cd4bcbcf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_completed}}=True</value>
+        <variable display_value="">d7138f0473031300612c273ffff6a78c</variable>
+    </sys_variable_value>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">d13e875a1b8ecc5033fbdbd3cc4bcb86</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Build Jenkins Job">67f6773f1bce8054e2e2fdd2cd4bcbbd</flow>
+        <inputs/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2.1.2</order>
+        <outputs_assigned>build_id,queue_id,status,error_message,build_completed</outputs_assigned>
+        <outputs_to_assign/>
+        <outputs_to_assign/>
+        <parent_ui_id>18409e84-8a2a-4a46-a3c3-a2f0c8721d6b</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <ui_id>de025e39-0e9a-4d54-a778-51a994ddeb93</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=8c07b73f1bce8054e2e2fdd2cd4bcbc5"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>8c07b73f1bce8054e2e2fdd2cd4bcbc5</document_key>
+        <order>5</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>0807b73f1bce8054e2e2fdd2cd4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value/>
+        <variable display_value="">fff6b73f1bce8054e2e2fdd2cd4bcbb2</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>8c07b73f1bce8054e2e2fdd2cd4bcbc5</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>4407b73f1bce8054e2e2fdd2cd4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value/>
+        <variable display_value="">fbf6b73f1bce8054e2e2fdd2cd4bcb72</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>8c07b73f1bce8054e2e2fdd2cd4bcbc5</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>c807b73f1bce8054e2e2fdd2cd4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <value/>
+        <variable display_value="">b7f6b73f1bce8054e2e2fdd2cd4bcb80</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=8c07b73f1bce8054e2e2fdd2cd4bcbc5"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>build_completed</field>
+        <id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>8807b73f1bce8054e2e2fdd2cd4bcbca</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_completed}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>build_id</field>
+        <id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>4c07b73f1bce8054e2e2fdd2cd4bcbca</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.build_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>error_message</field>
+        <id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>c407b73f1bce8054e2e2fdd2cd4bcbca</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.error_message}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>queue_id</field>
+        <id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>0007b73f1bce8054e2e2fdd2cd4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.queue_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>status</field>
+        <id>8c07b73f1bce8054e2e2fdd2cd4bcbc5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>c007b73f1bce8054e2e2fdd2cd4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</table>
+        <value>{{c224869f-85a1-43f3-b090-e9f29dbf5d3d.Status}}</value>
+    </sys_element_mapping>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_67f6773f1bce8054e2e2fdd2cd4bcbbd^sys_idNOT IN2bf6773f1bce8054e2e2fdd2cd4bcbc5,33f6b73f1bce8054e2e2fdd2cd4bcb6d"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>job_path</element>
+        <help/>
+        <hint/>
+        <label>Job Path</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:22</sys_created_on>
+        <sys_id>2bf6773f1bce8054e2e2fdd2cd4bcbc5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:22</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>job_parameters</element>
+        <help/>
+        <hint/>
+        <label>Job Parameters</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:23</sys_created_on>
+        <sys_id>33f6b73f1bce8054e2e2fdd2cd4bcb6d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:23</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd^sys_idNOT IN0007b73f1bce8054e2e2fdd2cd4bcbbe,73f6b73f1bce8054e2e2fdd2cd4bcba2,b7f6b73f1bce8054e2e2fdd2cd4bcb95,bff6b73f1bce8054e2e2fdd2cd4bcbae,fff6b73f1bce8054e2e2fdd2cd4bcb7b"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>build_completed</element>
+        <help/>
+        <hint/>
+        <label>Build Completed</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>0007b73f1bce8054e2e2fdd2cd4bcbbe</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>status</element>
+        <help/>
+        <hint/>
+        <label>Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>73f6b73f1bce8054e2e2fdd2cd4bcba2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>queue_id</element>
+        <help/>
+        <hint/>
+        <label>Queue ID</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:23</sys_created_on>
+        <sys_id>b7f6b73f1bce8054e2e2fdd2cd4bcb95</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:23</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>error_message</element>
+        <help/>
+        <hint/>
+        <label>Error Message</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+        <sys_id>bff6b73f1bce8054e2e2fdd2cd4bcbae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>build_id</element>
+        <help/>
+        <hint/>
+        <label>Build ID</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-07 06:40:23</sys_created_on>
+        <sys_id>fff6b73f1bce8054e2e2fdd2cd4bcb7b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-07 06:40:23</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd^sys_idNOT INf3f6b73f1bce8054e2e2fdd2cd4bcbb7,b7f6b73f1bce8054e2e2fdd2cd4bcbb8"/>
+    <sys_choice field="build_completed" table="var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>build_completed</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>True</label>
+            <language>en</language>
+            <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f3f6b73f1bce8054e2e2fdd2cd4bcbb7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+            <value>True</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>build_completed</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>False</label>
+            <language>en</language>
+            <name>var__m_sys_hub_flow_output_67f6773f1bce8054e2e2fdd2cd4bcbbd</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-01-07 06:40:24</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b7f6b73f1bce8054e2e2fdd2cd4bcbb8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-01-07 06:40:24</sys_updated_on>
+            <value>False</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

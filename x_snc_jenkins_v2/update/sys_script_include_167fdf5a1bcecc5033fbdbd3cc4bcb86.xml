@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_jenkins_v2.Jenkinsv2DecisionUtil</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>Jenkinsv2DecisionUtil</name>
+        <script><![CDATA[var Jenkinsv2DecisionUtil = Class.create();
+Jenkinsv2DecisionUtil.prototype = {
+    initialize: function() {},
+    jenkinsEventType: function(requestBody) {
+        var flowInputs = {};
+        flowInputs['job_name'] = requestBody.Job_Name;
+        flowInputs['job_path'] = requestBody.Job_Path;
+        flowInputs['build_number'] = requestBody.Build_Number;
+        return flowInputs;
+    },
+    subflowExecutionEvent: function(subFlowInputs, subFlowInternalName) {
+        var subFlowName = 'x_snc_jenkins_v2' + '.' + subFlowInternalName;
+        gs.info("Jenkins v2 Flow executed = " + subFlowName);
+        sn_fd.FlowAPI.startSubflow(subFlowName, subFlowInputs);
+		return;
+    },
+    type: 'Jenkinsv2DecisionUtil'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-02 13:19:47</sys_created_on>
+        <sys_id>167fdf5a1bcecc5033fbdbd3cc4bcb86</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Jenkinsv2DecisionUtil</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_script_include_167fdf5a1bcecc5033fbdbd3cc4bcb86</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 13:47:38</sys_updated_on>
+    </sys_script_include>
+</record_update>

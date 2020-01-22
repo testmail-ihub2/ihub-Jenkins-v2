@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Jenkins_build_details</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	var autho_header = request.getHeader('Authorization');
+	var code = new x_snc_jenkins_v2.JenkinsWebhookUtil()
+	.validateWebhookRequest(autho_header);
+	if (code == "200") {
+		gs.info("Authentication Successful");
+		var JenkinsDetails = new x_snc_jenkins_v2.JenkinsWebhookUtil()
+		.validateInputs(
+			"Webhook Response", request.body.data);
+		if (JenkinsDetails == 500) {
+			gs.error(
+				"Incomplete webhook response.Check Jenkins Job Configuration"
+			);
+			return 500;
+		} 
+		else {
+			var inputs = new Object();
+			inputs['u_job_name'] = JenkinsDetails.Job_Name;
+			inputs['u_build_number'] = JenkinsDetails.Build_Number;
+			inputs['u_job_path']= JenkinsDetails.Job_Path;
+			var decisionTable = new sn_dt.DecisionTableAPI();
+			var decisions = decisionTable.getDecision('eb2b5f561bcecc5033fbdbd3cc4bcbc2', inputs);
+			if (!decisions) {
+				gs.info("Decision record was not matched.");
+				return 200;
+			}
+			else {
+				gs.info("decision output =" + decisions.getValue("subflow"));
+
+				var gr = new GlideRecord("sys_hub_flow");
+				gr.initialize();
+				gr.get(decisions.getValue("subflow"));
+				gr.next();
+
+				var subFlowInternalName;
+				for (var col in gr) {
+					if (col == 'internal_name') {
+						subFlowInternalName = gr[col];
+						gs.info("Matched Subflow Internal Name = " + subFlowInternalName);
+					}
+				}
+
+				var subFlowInputs = new x_snc_jenkins_v2.Jenkinsv2DecisionUtil().jenkinsEventType(JenkinsDetails);
+
+				new x_snc_jenkins_v2.Jenkinsv2DecisionUtil().subflowExecutionEvent(subFlowInputs, subFlowInternalName);
+			}
+		}
+		return "Success";
+	}
+	else {
+		gs.error("Authentication Failed");
+		return 500;
+	}
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_snc_jenkins_v2/jenkins_v2_webhook/build_status</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/build_status</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:52:13</sys_created_on>
+        <sys_id>fea4c64a1bca8c5033fbdbd3cc4bcb21</sys_id>
+        <sys_mod_count>22</sys_mod_count>
+        <sys_name>Jenkins_build_details</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_ws_operation_fea4c64a1bca8c5033fbdbd3cc4bcb21</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 13:26:22</sys_updated_on>
+        <web_service_definition display_value="Jenkins v2 Webhook">d7740e0a1bca8c5033fbdbd3cc4bcb30</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

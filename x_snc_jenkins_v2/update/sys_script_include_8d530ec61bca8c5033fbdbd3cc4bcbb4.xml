@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_jenkins_v2.JenkinsErrorHandler</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>JenkinsErrorHandler</name>
+        <script><![CDATA[var JenkinsErrorHandler = Class.create();
+JenkinsErrorHandler.prototype = {
+	initialize: function() {},
+
+	/**
+      Params: status code & response body
+      Functionality: Filters the response body to get the appropriate error message
+      Return: Appropriate error message.
+    */
+	genericErrorHandler: function(inputObj, outputObj) {
+		/*Possible Errors
+    	1. Invalid username or password - 401
+    	2. If no crumb is added.Will only occur if it is enabled in Jenkins - 403
+    	3. Invalid Existing job name in case of failure - 404
+    	4. Invalid syntax - 400
+
+    */
+		outputObj.status = 'Error';
+
+		//Handling "Credential ID Exists " error
+		if (inputObj.status_code == '200' && inputObj.credential_id != undefined) {
+			outputObj.error_message = "Credential with given ID already exists";
+		} else if (inputObj.status_code == '200' && inputObj.response == "invalid_restart_type")
+				outputObj.error_message = "Provided value for Restart Type is invalid.";
+		else if (inputObj.status_code == '401')
+				outputObj.error_message = "Invalid username or password/token.";
+		else if (inputObj.status_code == '400') {
+
+			if (inputObj.response.indexOf("Nothing is submitted") != -1) {
+				outputObj.error_message = "Job Parameters are missing. This job is configured with Parameters so requires to provide parameters.";
+			} else {
+				outputObj.error_message = "The request connot be fulfilled due to bad syntax.";
+			}
+		} else if (inputObj.status_code == '403') {
+			if (inputObj.response.indexOf('No valid crumb was included in the request') != -1)
+				outputObj.error_message = "No valid CSRF Token was included in the request.";
+			else
+				outputObj.error_message = "You do not have enough permissions to perform this action in Jenkins server.";
+		} else if (inputObj.status_code == '404') {
+			if (inputObj.response.indexOf("Problem accessing /crumbIssuer/api/xml") != -1) {
+				outputObj.error_message = "'Prevent Cross Site Request Forgery exploits' security option is not enabled on your Jenkins Server.";
+			} else if (inputs.response.indexOf('Not Found') != -1){
+				outputObj.error_message = "Provided value for Restart Type is invalid.";
+			} else {
+				outputObj.error_message = "The requested resource could not be found.";
+			}
+		} else if (inputObj.status_code == '503') {
+			if (inputObj.response.indexOf('Please wait while Jenkins is getting ready to work') != -1 || inputObj.response.indexOf('Please wait while Jenkins is restarting') != -1)
+				outputObj.error_message = "The Jenkins server is being restarted.";
+			else
+				outputObj.error_message = "Unknown Error.";
+		} else
+			outputObj.error_message = "Unknown Error.";
+
+		//log error message
+		gs.error(outputObj.error_message.toString());
+		//return the error message
+		return outputObj;
+	},
+	/*
+  	Error handling for Job Management
+
+  */
+	jobErrorHandler: function(inputObj, outputObj) {
+		outputObj.status = 'Error';
+		var header;
+
+		if (inputObj.response_header != undefined)
+			header = JSON.parse(inputObj.response_header);
+	if (inputObj.status_code == '400') {
+			if (inputObj.response.indexOf("No name is specified") != -1) {
+				outputObj.error_message = "Job Name does not match the job name convention pattern.";
+			} else if(inputs.response.indexOf("The new name is the same as the current name.") != -1){
+				outputObj.error_message = "Provided New Job Name is same as the Current Job Name.";
+			} else if(inputs.response.indexOf("The name")!= -1 && inputs.response.indexOf("is already in use.")!= -1){
+				outputObj.error_message = "Job Name already exist.";
+			}
+}else if (inputObj.status_code == '404') {
+			if ((inputObj.parent_folder) && inputObj.response.indexOf("Problem accessing") != -1) {
+				outputObj = this.folderErrorHandler(inputObj, outputObj);
+			} else if (inputObj.response.indexOf(inputObj.target_path) != -1) {
+				var err = "The target path " + inputObj.target_folder + " for the destination job name doesn't exists or inaccessible. ";
+				outputObj.error_message = err.toString();
+			} else if ((inputObj.build_number) && inputObj.response.indexOf("Problem accessing") != -1) {
+				var err_inv = "Either Build Number or Job Path doesn't exist or not accessible.";
+				outputObj.error_message = err_inv.toString();
+			} else if (inputObj.build_filter_for_build_number) {
+				outputObj.error_message = "The requested job or the selected build status for the job doesn't exists or inaccessible, or the job has no build history.";
+			} else {
+				outputObj.error_message = "The requested job doesn't exist or inaccessible.";
+			}
+		} else if (header != undefined && header['X-Error'] != undefined) {
+			if (header['X-Error'].toString().indexOf('unsafe character') != -1) {
+				outputObj.error_message = "The request could not be fulfilled due to invalid charaters in Job Name.";
+			} else {
+				outputObj.error_message = header['X-Error'].toString();
+			}
+		} else if (inputObj.status_code == '500') {
+			if (inputObj.response.indexOf('No such parameter definition') != -1) {
+				outputObj.error_message = "Provided job parameters are incorrect.";
+			} else if (inputObj.response.indexOf('already exists') != -1) {
+				outputObj.error_message = "Job name already exist.";
+			} else if (inputObj.response.indexOf('SAXParseException') != -1) {
+				outputObj.error_message = "The request could not be fulfilled due to bad XML syntax.";
+			} else if (inputObj.response.indexOf('Malformed tree expression') != -1) {
+				outputObj.error_message = "Build Range format is incorrect or unknown error.";
+			}else if (inputObj.response.indexOf("Unable to delete '/var/lib/jenkins/jobs/") != -1){
+					outputObj.error_message = "The request could not be fulfilled due to invalid characters in job name.";
+			}
+			
+		} else if (inputObj.status_code == '200') {
+			outputObj.error_message = "Provided Job Path is a Folder Path and not a Job Path.";
+		}
+
+		if (outputObj.error_message == undefined) {
+			outputObj = this.genericErrorHandler(inputObj, outputObj);
+		}
+		//log error message
+		gs.error(outputObj.error_message.toString());
+		return outputObj;
+	},
+
+	/*Error handler for Get Build History action.*/
+	getBuildHistoryErrorHandler: function(inputObj, outputObj) {
+		outputObj.status = 'Error';
+		if (inputObj.status_code == '404') {
+			if (inputObj.response.indexOf("Problem accessing") != -1) {
+				var err_inv = "Either build number or job path doesn't exists or not accessible.";
+				outputObj.error_message = err_inv.toString();
+			}
+		}
+		
+		else if (inputObj.status_code == '200') {
+			outputObj.error_message = "Provided Job Path is a Folder Path and not a Job Path.";
+		} else if (inputObj.status_code == '500') {
+			outputObj.error_message = "Provided Build Range is invalid.";
+		}
+		
+		if (outputObj.error_message == undefined) {
+			outputObj = this.genericErrorHandler(inputObj, outputObj);
+		}
+		//log error message
+		gs.error(outputObj.error_message.toString());
+		return outputObj;
+	},
+	
+	
+	/*
+  	Error handling for Node Management
+
+  */
+	nodeErrorHandler: function(inputObj, outputObj) {
+		outputObj.status = 'Error';
+		if (inputObj.status_code == '404') {
+			if (inputObj.response.indexOf("Problem accessing") != -1) {
+				outputObj.error_message = " The requested node doesn't exist or is not accessible.";
+			}
+		} else if (inputObj.status_code == '400' && inputObj.response.indexOf("already exists") != -1) {
+			outputObj.error_message = "A node already exists with the given name.";
+		}
+		else if (inputObj.status_code == '400' && inputObj.response.indexOf("unsafe character") != -1) {
+			outputObj.error_message = "The request could not be fulfilled due to invalid characters in node name.";
+		} else if (inputObj.status_code == '400' && inputObj.response.indexOf("Query parameter 'name' is required") != -1) {
+			outputObj.error_message = "The request could not be fulfilled due to invalid characters in node name.";
+		} else if(inputObj.status_code == '500'){
+			outputObj.error_message = "Provided value for one of the inputs is invalid.";
+		} else {
+			outputObj = this.genericErrorHandler(inputObj, outputObj);
+		}
+		//log error message
+		gs.error(outputObj.error_message.toString());
+		return outputObj;
+	},
+
+	/**
+     *  method for handling error folder 
+     *
+     */
+	folderErrorHandler: function(inputObj, outputObj) {
+		outputObj.status = 'Error';
+		if (inputObj.status_code == '404') {
+			if ((inputObj.parent_folder) && inputObj.response.indexOf("Problem accessing") != -1) {
+				outputObj.error_message = "Parent folder path doesn't exists or not accessible.";
+			} else if ((inputObj.folder_path) && inputObj.response.indexOf("Problem accessing") && inputObj.response.indexOf("Not Found") != -1) {
+				outputObj.error_message = "Folder Path doesn't exists or not accessible.";
+			} else {
+				outputObj.error_message = "The requested folder name could not be found.";
+			}
+		} else if (inputObj.status_code == '400') {
+			var header;
+
+			if (inputObj.response_header != undefined)
+				header = JSON.parse(inputObj.response_header);
+
+			if (header != undefined && header['X-Error'] != undefined) {
+				if (header['X-Error'].toString().indexOf('unsafe character') != -1) {
+					outputObj.error_message = "The request could not be fulfilled due to invalid charaters in folder name.";
+				} else if (header['X-Error'].toString().indexOf('A job already exists with the name') != -1) {
+					outputObj.error_message = "A folder already exists with the given name.";
+				} else {
+					outputObj.error_message = header['X-Error'].toString();
+				}
+			} else {
+				if (inputObj.response.indexOf("No item type") != -1 && inputObj.response.indexOf("com.cloudbees.hudson.plugins.folder.Folder") != -1)
+					outputObj.error_message = "CloudBees Folders plugin is not installed on the Jenkins server.";
+				else if(inputObj.response.indexOf("No name is specified") != -1){
+					outputObj.error_message = "Folder Name does not match the job name convention pattern.";
+				}
+				else {
+					outputObj.error_message = "The request could not be fulfilled due to invalid charaters in folder name.";
+				}
+			}
+		} else if (inputObj.status_code == '200') {
+			outputObj.error_message = "Provided Folder Path is not a Folder Path but a Job Path.";
+		} else if(inputObj.status_code == "500"){
+			if(inputObj.response.indexOf("File name too long") != -1 &&  inputObj.response.indexOf("/var/lib/jenkins/jobs/") != -1){
+				outputObj.error_message = "Folder Name does not match the job name convention pattern.";
+			}
+		} 
+		else {
+			outputObj = this.genericErrorHandler(inputObj, outputObj);
+		}
+		//log error message
+		gs.error(outputObj.error_message.toString());
+		return outputObj;
+	},
+
+
+	viewErrorHandler: function(inputObj, outputObj) {
+		outputObj.status = 'Error';
+		if (inputObj.status_code == '404') {
+			if (inputObj.response.indexOf("Problem accessing") != -1) {
+				if ((inputObj.view_name) || (inputObj.parent_folder)) {
+					if ((inputObj.view_name) && (inputObj.parent_folder)) {
+						outputObj.error_message = "Either parent folder path or view name doesn't exist or not accessible.";
+					} else {
+						outputObj.error_message = "View name doesn't exist or not accessible.";
+					}
+					outputObj.error_message = outputObj.error_message.toString();
+				} else if (inputObj.view_path) {
+					outputObj.error_message = "View path doesn't exists/inaccessible or view type is not list view.";
+					outputObj.error_message = outputObj.error_message.toString();
+				} else {
+					outputObj.error_message = "Parent folder path doesn't exist or not accessible.";
+				}
+			} else {
+				outputObj.error_message = "The requested view name could not be found.";
+			}
+		} else if (inputObj.status_code == '400') {
+			var header;
+
+			if (inputObj.response_header != undefined)
+				header = JSON.parse(inputObj.response_header);
+
+			if (header != undefined && header['X-Error'] != undefined) {
+				if (header['X-Error'].toString().indexOf('unsafe character') != -1) {
+					outputObj.error_message = "The request could not be fulfilled due to invalid charaters in view name.";
+				} else if (header['X-Error'].toString().indexOf("Query parameter 'name' does not correspond to a known") != -1) {
+					outputObj.error_message = "Job path doesn't exists or not accessible.";
+					outputObj.error_message = outputObj.error_message.toString();
+				}else if (header['X-Error'].toString().indexOf("No name is specified") != -1) {
+					outputObj.error_message = "The request could not be fulfilled due to invalid charaters in view name.";
+				} else if (header['X-Error'].toString().indexOf("No view type  inquiry  is known") != -1) {
+					outputObj.error_message = "Provided value for View Type is invalid.";
+				} 
+				else {
+					outputObj.error_message = header['X-Error'].toString();
+				}
+			}
+		} else if (inputObj.status_code == '500') {
+			if (inputObj.response.indexOf("Cannot delete last view") != -1) {
+				outputObj.error_message = "Cannot delete last view.";
+			}
+		} else {
+			outputObj = this.genericErrorHandler(inputObj, outputObj);
+		}
+		//log error message
+		gs.error(outputObj.error_message.toString());
+		return outputObj;
+	},
+
+
+	userErrorHandler: function(inputObj, outputObj) {
+		outputObj.status = 'Error';
+		if (inputObj.status_code == '200') {
+			if (inputObj.response.indexOf("Invalid e-mail address") != -1) {
+				outputObj.error_message = "E-mail ID entered is not valid.";
+			} else if (inputObj.response.indexOf("User name is already taken") != -1) {
+				outputObj.error_message = "User Name is already taken.";
+			} else if (inputObj.response.indexOf("is prohibited as a username for security reasons") != -1) {
+				outputObj.error_message = "User Name provided is prohibited due to security reasons.";
+			} else if(inputObj.response.indexOf('User name must only contain alphanumeric characters, underscore and dash') != -1){
+				outputObj.error_message = "Provided User Name is invalid.";
+			}
+		} else if (inputObj.status_code == '404' && (inputObj.user_name) && inputObj.response.indexOf("Problem accessing") != -1) {
+			outputObj.error_message = "The user to be deleted, not found on Jenkins.";
+		} else if (inputObj.status_code == '400' || inputObj.status_code == '401' || inputObj.status_code == '403' || inputObj.status_code == '404' || inputObj.status_code == '503') {
+			outputObj = this.genericErrorHandler(inputObj, outputObj);
+		}
+		gs.error(outputObj.error_message.toString());
+		return outputObj;
+	},
+
+
+	type: 'JenkinsErrorHandler'
+
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:47:29</sys_created_on>
+        <sys_id>8d530ec61bca8c5033fbdbd3cc4bcbb4</sys_id>
+        <sys_mod_count>40</sys_mod_count>
+        <sys_name>JenkinsErrorHandler</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_script_include_8d530ec61bca8c5033fbdbd3cc4bcbb4</sys_update_name>
+        <sys_updated_by>sheetal</sys_updated_by>
+        <sys_updated_on>2020-01-06 12:27:56</sys_updated_on>
+    </sys_script_include>
+</record_update>

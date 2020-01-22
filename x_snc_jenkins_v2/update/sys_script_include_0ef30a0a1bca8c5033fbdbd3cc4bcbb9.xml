@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_jenkins_v2.JenkinsWebhookUtil</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>JenkinsWebhookUtil</name>
+        <script><![CDATA[var JenkinsWebhookUtil = Class.create();
+JenkinsWebhookUtil.prototype = {
+    initialize: function() {},
+    validateInputs: function(key, inputs) {
+        if ((!inputs) && (inputs == '') && (inputs == "")) {
+            gs.error("The field " + key + " is null.");
+            return 500;
+        } else
+            return inputs;
+    },
+    validateWebhookRequest: function(key) {
+
+        var clientRcrd = new GlideRecord(
+            "x_snc_jenkins_v2_jenkins_webhook_client_details");
+        clientRcrd.query();
+        while (clientRcrd.next()) {
+            var decryptedID = clientRcrd.authorization_key
+                .getDecryptedValue();
+            if (decryptedID == key) {
+                return 200;
+            }
+        }
+        gs.addErrorMessage("Authorization header did not match.");
+        return 500;
+    },
+    processWebhookPayload: function(inputPayload) {
+        try {
+
+            var job_name = inputPayload.job_name;
+            var build_number = inputPayload.build_number;
+            var job_path = inputPayload.job_path;
+            var build_status = inputPayload.build_status;
+            var timestamp = inputPayload.timestamp;
+
+            var jenkinsv2jobinfoStagingGr = new GlideRecord(
+                'x_snc_jenkins_v2_jenkins_job_info_staging_table');
+            jenkinsv2jobinfoStagingGr.initialize();
+            jenkinsv2jobinfoStagingGr.setValue('build_number',
+                build_number);
+            jenkinsv2jobinfoStagingGr.setValue('job_name', job_name);
+            jenkinsv2jobinfoStagingGr.setValue('build_status',
+                build_status);
+            jenkinsv2jobinfoStagingGr.setValue('job_path', job_path);
+            jenkinsv2jobinfoStagingGr.setValue('timestamp', timestamp);
+            //jenkinsv2jobinfoStagingGr.setValue('queue_id', queue_id);
+            jenkinsv2jobinfoStagingGr.insert();
+
+        } catch (err) {
+            gs.addErrorMessage(
+                'Received incomplete webhook Payload from Jenkins.');
+            throw new Error(
+                "Received incomplete webhook Payload from Jenkins.");
+        }
+
+    },
+    type: 'JenkinsWebhookUtil'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>priytams</sys_created_by>
+        <sys_created_on>2020-01-01 11:48:55</sys_created_on>
+        <sys_id>0ef30a0a1bca8c5033fbdbd3cc4bcbb9</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>JenkinsWebhookUtil</sys_name>
+        <sys_package display_value="Jenkins v2" source="x_snc_jenkins_v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Jenkins v2">c66af1ca1b8a8c5033fbdbd3cc4bcb75</sys_scope>
+        <sys_update_name>sys_script_include_0ef30a0a1bca8c5033fbdbd3cc4bcbb9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-02 08:24:24</sys_updated_on>
+    </sys_script_include>
+</record_update>
